@@ -1,0 +1,8 @@
+<div class="container">
+  <h3><%= @user.name %> current progress</h3>
+  <div class="progress">
+    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="40"
+    aria-valuemin="0" aria-valuemax="100" style="width: <%= @user.todays_progress_in_percent%>%">
+    </div>
+  </div>
+</div>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gsm Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link href="assets/css/bootstrap-responsive.css" rel="stylesheet"> -->
+  <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+  <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="1s7nmmm913h1kqy"></script>
+  <!-- <script src="Chart.min.js"></script> -->
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <%= csrf_meta_tags %>
+</head>
+<body>
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="nav navbar-brand nav-center" href="/">GSM Dashboard</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <% if current_user %>
+              <li><%= link_to "Tasks", tasks_path %></li>
+            <% end %>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <% if current_user %>
+              <li><%= link_to current_user.email, current_user %></li>
+              <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+            <% else %>
+              <li><%= link_to "Sign In", new_user_session_path %></li>
+              <li><%= link_to "Sign Up", new_user_registration_path %></li>
+           <% end %>
+         </ul>
+       </div>
+     </div>
+    </nav>
+
+    <% if flash[:notice] %>
+       <div class="alert alert-success">
+         <button type="button" class="close" data-dismiss="alert">&times;</button>
+         <%= flash[:notice] %>
+       </div>
+     <% elsif flash[:error] %>
+       <div class="alert alert-danger">
+         <button type="button" class="close" data-dismiss="alert">&times;</button>
+         <%= flash[:error] %>
+       </div>
+     <% elsif flash[:alert] %>
+       <div class="alert alert-warning">
+         <button type="button" class="close" data-dismiss="alert">&times;</button>
+         <%= flash[:alert] %>
+       </div>
+    <% end %>
+
+    <%= yield %>
+
+  </div>
+</body>
+<footer>
+  <div class="grey-box">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-3">
+          <%= image_tag("GSMW_LOGO.png", :size => "100x100") %>
+        </div>
+        <div class="col-xs-6">
+          <h4>General Sheet Metal Works Inc.</h4>
+          <p>
+            1902 South Main Street<br>
+            South Bend, IN  49913<br>
+            1-574-288-0164
+          </p>
+        </div>
+        <div class="col-xs-3">
+          <br>
+          <p>
+            <%= link_to "", edit_user_registration_path, class: "btn btn-default glyphicon glyphicon-user", id: "user" %><div id='popup'>Edit your profile</div>
+          </p>
+          <p>
+            <button class="btn btn-default fa fa-dropbox fa-lg", id="dropbox"></button><div id='popup02'>View Dropbox</div>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="dark-grey-box">
+      <div class="container">
+        <p class="white-font">&copy; 2016 General Sheet Metal Works Inc.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+</html>
+
+<script>
+  document.getElementById("dropbox").onclick = function () {
+        Dropbox.choose({
+            linkType: "direct",
+            success: function (files) {
+                alert(files[0].link);
+            }
+        });
+    };
+
+  var options = {
+
+    // Required. Called when a user selects an item in the Chooser.
+    success: function(files) {
+        alert("Here's the file link: " + files[0].link)
+    },
+
+    // Optional. Called when the user closes the dialog without selecting a file
+    // and does not include any parameters.
+    cancel: function() {
+
+    },
+
+    // Optional. "preview" (default) is a preview link to the document for sharing,
+    // "direct" is an expiring link to download the contents of the file. For more
+    // information about link types, see Link types below.
+    linkType: "preview", // or "direct"
+
+    // Optional. A value of false (default) limits selection to a single file, while
+    // true enables multiple file selection.
+    multiselect: false, // or true
+
+    // Optional. This is a list of file extensions. If specified, the user will
+    // only be able to select files with these extensions. You may also specify
+    // file types, such as "video" or "images" in the list. For more information,
+    // see File types below. By default, all extensions are allowed.
+    extensions: ['.pdf', '.doc', '.docx'],
+  };
+</script>

@@ -1,0 +1,17 @@
+<p>
+<div class="pull-right">
+  <%= task.time_left %> - hours left -
+  <% if policy(Task.new).create? %>
+    <%= link_to "", task, method: :delete, class: 'btn-sm btn-danger glyphicon glyphicon-trash' %>
+  <% end %>
+</div>
+<%= form_for task, remote: true do |f| %>
+  <%= f.hidden_field :completed, value: !task.completed %>
+
+  <%= f.button :submit, class: task.completed ? 'btn btn-success' : 'btn btn-default' do %>
+    <i class= '<%= task.completed ? "glyphicon glyphicon-thumbs-up" : "glyphicon glyphicon-thumbs-down" %>' >
+    </i>
+  <% end %>
+  <%= link_to task.name, task_path(task) %>
+<% end %>
+</p>

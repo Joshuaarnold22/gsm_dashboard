@@ -1,0 +1,1 @@
+$('.toggle_task#<%=@task.id%>').html("<%= escape_javascript(render partial: 'toggle_task', locals: { task: @task}) %>");

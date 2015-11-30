@@ -1,0 +1,32 @@
+<div class="container">
+  <h1>Tasks</h1>
+</div>
+    <% if policy(Task.new).create? %>
+      <% @users.each do |user| %>
+      <div class="container">
+        <h5><%= link_to user.name, user_path(user) %></h5>
+        <%= link_to "Add New Task", new_user_task_path(user), class: 'btn btn-success' %>
+      </div>
+        <div class="task-container">
+          <div class="container">
+            <% @tasks.each do |task| %>
+              <% if task.user_id == user.id %>
+                <div class="toggle_task" id=<%= task.id %>>
+                  <%= render partial: 'toggle_task', locals: { task: task } %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+    <div class="task-container">
+      <div class="container">
+        <% current_user.tasks.each do |task| %>
+          <div class="toggle_task" id=<%= task.id%>>
+            <%= render partial: 'toggle_task', locals: { task: task} %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
