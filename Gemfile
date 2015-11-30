@@ -45,8 +45,6 @@ gem 'dropbox-sdk'
 
 gem 'ftools'
 
-gem 'heroku'
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
