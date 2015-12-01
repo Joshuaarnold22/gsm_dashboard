@@ -7,7 +7,7 @@ class Plex
   end
 
   def questions
-    test_array = []
+    test_array = Array.new
     data = self.class.get("/DataSource/Service.asmx/ExecuteDataSourceByDataSourceKey?dataSourceKey=6265", basic_auth: @auth)
     test_array.push(data["ExecuteDataSourceResult"]["ResultSets"]["ResultSet"]["Rows"]["Row"][0]["Columns"]["Column"][0]["Value"].to_i)
     # test_array << data["ExecuteDataSourceResult"]["ResultSets"]["ResultSet"]["Rows"]["Row"][0]["Columns"]["Column"][3]["Value"].to_i
