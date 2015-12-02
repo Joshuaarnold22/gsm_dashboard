@@ -13,6 +13,8 @@ class Plex
     test_array << data["ExecuteDataSourceResult"]["ResultSets"]["ResultSet"]["Rows"]["Row"][0]["Columns"]["Column"][3]["Value"].to_i
     test_array << data["ExecuteDataSourceResult"]["ResultSets"]["ResultSet"]["Rows"]["Row"][0]["Columns"]["Column"][4]["Value"].to_i
     test_array << data["ExecuteDataSourceResult"]["ResultSets"]["ResultSet"]["Rows"]["Row"][0]["Columns"]["Column"][18]["Value"].to_i
+    test_array << data["ExecuteDataSourceResult"]["ResultSets"]["ResultSet"]["Rows"]["Row"][0]["Columns"]["Column"][5]["Value"].to_i
+
     test_array
   end
 
