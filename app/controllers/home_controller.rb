@@ -4,6 +4,5 @@ class HomeController < ApplicationController
     @tasks = Task.all
     @plex = Plex.new
     @plex_data = @plex.questions
-    # @plex_data = plex.questions
   end
 end
